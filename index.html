@@ -85,7 +85,16 @@
         }
         // function to divide two numbers
         function divide(a, b) {
-            return parseInt(a) / parseInt(b);
+            if (parseInt(b) == 0) {
+                alert("Error! Division by zero!");
+                num_buffer = NaN;
+                num_screen = "";
+                operator = "";
+                return NaN;
+            } else {
+                return parseInt(a) / parseInt(b);
+            }
+
         }
         // function to call one of the above functions (add, subtract, multiply or divide) with two numbers
         function operate(operator, a, b) {
@@ -116,14 +125,19 @@
                         num_screen = "";
                     } else {
                         num_buffer = operate(operator, num_buffer, num_screen);
-                        if (e.target.textContent == "=") {
-                            operator = "";
-                            num_screen = num_buffer;
+                        if (!isNaN(num_buffer)) {
+                            if (e.target.textContent == "=") {
+                                operator = "";
+                                num_screen = num_buffer;
+                            } else {
+                                operator = e.target.innerText;
+                                num_screen = "";
+                            }
+                            display.innerText = num_buffer;
                         } else {
-                            operator = e.target.innerText;
-                            num_screen = "";
+                            display.innerText = "";
                         }
-                        display.innerText = num_buffer;
+
                     }
                 }
             }
