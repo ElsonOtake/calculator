@@ -3,8 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <title>Calculator</title>
+  <style>
+      #calcBody {
+          width: 150px;
+      }
+      #display {
+        background-color: aquamarine;
+      }
+      #keyboard {
+          display: flex;
+          flex-wrap: wrap;
+      }
+      .keyLines {
+          justify-content: space-evenly;
+          margin-bottom: 5px;
+      }
+      button {
+          width: 30px;
+          height: 30px;
+      }
+      .dummyBtn {
+          visibility: hidden;
+      }
+  </style>
 </head>
 <body>
+    <h1>Calculator</h1>
+    <div id="calcBody">
+        <div id="display">1234567890</div>
+        <div id="keyboard">
+            <div class="keyLines">
+                <button id="clearBtn">C</button>
+                <button class="dummyBtn"></button>
+                <button class="dummyBtn"></button>
+                <button id="divideBtn">/</button>
+            </div>
+            <div class="keyLines">
+                <button id="data-7">7</button>
+                <button id="data-8">8</button>
+                <button id="data-9">9</button>
+                <button id="multiplyBtn">X</button>
+            </div>
+            <div class="keyLines">
+                <button id="data-4">4</button>
+                <button id="data-5">5</button>
+                <button id="data-6">6</button>
+                <button id="subtractBtn">-</button>
+            </div>
+            <div>
+                <button id="data-1">1</button>
+                <button id="data-2">2</button>
+                <button id="data-3">3</button>
+                <button id="subtractBtn">+</button>
+            </div>
+            <div>
+                <button class="dummyBtn"></button>
+                <button id="data-0">0</button>
+                <button class="dummyBtn"></button>
+                <button id="equalBtn">=</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // function to add two numbers
         function add(a, b) {
