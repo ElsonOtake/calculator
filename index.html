@@ -6,22 +6,39 @@
 </head>
 <body>
     <script>
+        // function to add two numbers
         function add(a, b) {
             return a + b;
         }
+        // function to subtract two numbers
         function subtract(a, b) {
             return a - b;
         }
+        // function to multiply two numbers
         function multiply(a, b) {
             return a * b;
         }
+        // function to divide two numbers
         function divide(a, b) {
             return a / b;
         }
-        console.log(add(2, 5));
-        console.log(subtract(5, 2));
-        console.log(multiply(2, 5));
-        console.log(divide(2, 5));
+        // function to call one of the above functions (add, subtract, multiply or divide) with two numbers
+        function operate(operator, a, b) {
+            switch (operator) {
+                case "+": 
+                    return add(a, b);
+                case "-": 
+                    return subtract(a, b);               
+                case "*": 
+                    return multiply(a, b);               
+                case "/": 
+                    return divide(a, b);
+            }
+        }
+        console.log(operate("+", 2, 5));
+        console.log(operate("-", 5, 2));
+        console.log(operate("*", 2, 5));
+        console.log(operate("/", 2, 5));
     </script>
 </body>
 </html>
