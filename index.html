@@ -9,6 +9,7 @@
       }
       #display {
         background-color: aquamarine;
+        text-align: right;
       }
       #keyboard {
           display: flex;
@@ -39,26 +40,26 @@
                 <button id="divideBtn">/</button>
             </div>
             <div class="keyLines">
-                <button id="data-7">7</button>
-                <button id="data-8">8</button>
-                <button id="data-9">9</button>
+                <button id="data-7" class="number">7</button>
+                <button id="data-8" class="number">8</button>
+                <button id="data-9" class="number">9</button>
                 <button id="multiplyBtn">X</button>
             </div>
             <div class="keyLines">
-                <button id="data-4">4</button>
-                <button id="data-5">5</button>
-                <button id="data-6">6</button>
+                <button id="data-4" class="number">4</button>
+                <button id="data-5" class="number">5</button>
+                <button id="data-6" class="number">6</button>
                 <button id="subtractBtn">-</button>
             </div>
             <div>
-                <button id="data-1">1</button>
-                <button id="data-2">2</button>
-                <button id="data-3">3</button>
+                <button id="data-1" class="number">1</button>
+                <button id="data-2" class="number">2</button>
+                <button id="data-3" class="number">3</button>
                 <button id="subtractBtn">+</button>
             </div>
             <div>
                 <button class="dummyBtn"></button>
-                <button id="data-0">0</button>
+                <button id="data-0" class="number">0</button>
                 <button class="dummyBtn"></button>
                 <button id="equalBtn">=</button>
             </div>
@@ -66,6 +67,9 @@
     </div>
 
     <script>
+        let num_a = "";
+        let num_b = "";
+        let display = document.getElementById("display");
         // function to add two numbers
         function add(a, b) {
             return a + b;
@@ -95,10 +99,12 @@
                     return divide(a, b);
             }
         }
-        console.log(operate("+", 2, 5));
-        console.log(operate("-", 5, 2));
-        console.log(operate("*", 2, 5));
-        console.log(operate("/", 2, 5));
+        document.getElementById("keyboard").addEventListener('click', function(e) {
+            if (e.target.className == "number") {
+                num_a += e.target.textContent;
+                display.innerText = num_a;
+            }
+        });
     </script>
 </body>
 </html>
