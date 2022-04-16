@@ -31,60 +31,61 @@
 <body>
     <h1>Calculator</h1>
     <div id="calcBody">
-        <div id="display">1234567890</div>
+        <div id="display"></div>
         <div id="keyboard">
             <div class="keyLines">
                 <button id="clearBtn">C</button>
                 <button class="dummyBtn"></button>
                 <button class="dummyBtn"></button>
-                <button id="divideBtn">/</button>
+                <button id="divideBtn" class="operator">/</button>
             </div>
             <div class="keyLines">
                 <button id="data-7" class="number">7</button>
                 <button id="data-8" class="number">8</button>
                 <button id="data-9" class="number">9</button>
-                <button id="multiplyBtn">X</button>
+                <button id="multiplyBtn" class="operator">X</button>
             </div>
             <div class="keyLines">
                 <button id="data-4" class="number">4</button>
                 <button id="data-5" class="number">5</button>
                 <button id="data-6" class="number">6</button>
-                <button id="subtractBtn">-</button>
+                <button id="subtractBtn" class="operator">-</button>
             </div>
             <div>
                 <button id="data-1" class="number">1</button>
                 <button id="data-2" class="number">2</button>
                 <button id="data-3" class="number">3</button>
-                <button id="subtractBtn">+</button>
+                <button id="subtractBtn" class="operator">+</button>
             </div>
             <div>
                 <button class="dummyBtn"></button>
                 <button id="data-0" class="number">0</button>
                 <button class="dummyBtn"></button>
-                <button id="equalBtn">=</button>
+                <button id="equalBtn" class="operator">=</button>
             </div>
         </div>
     </div>
 
     <script>
-        let num_a = "";
-        let num_b = "";
+        let num_screen = "";
+        let num_buffer = NaN;
+        let operator = "";
         let display = document.getElementById("display");
         // function to add two numbers
         function add(a, b) {
-            return a + b;
+            return parseInt(a) + parseInt(b);
         }
         // function to subtract two numbers
         function subtract(a, b) {
-            return a - b;
+            return parseInt(a) - parseInt(b);
         }
         // function to multiply two numbers
         function multiply(a, b) {
-            return a * b;
+            return parseInt(a) * parseInt(b);
         }
         // function to divide two numbers
         function divide(a, b) {
-            return a / b;
+            return parseInt(a) / parseInt(b);
         }
         // function to call one of the above functions (add, subtract, multiply or divide) with two numbers
         function operate(operator, a, b) {
@@ -93,7 +94,7 @@
                     return add(a, b);
                 case "-": 
                     return subtract(a, b);               
-                case "*": 
+                case "X": 
                     return multiply(a, b);               
                 case "/": 
                     return divide(a, b);
@@ -101,8 +102,36 @@
         }
         document.getElementById("keyboard").addEventListener('click', function(e) {
             if (e.target.className == "number") {
-                num_a += e.target.textContent;
-                display.innerText = num_a;
+                num_screen += e.target.textContent;
+                display.innerText = num_screen;
+            }
+            if (e.target.className == "operator") {
+                if (num_screen != "") {
+                    if (isNaN(num_buffer)) {
+                        num_buffer = num_screen;
+                        num_screen = "";
+                    }
+                    if (operator == "") {
+                        operator = e.target.innerText;
+                        num_screen = "";
+                    } else {
+                        num_buffer = operate(operator, num_buffer, num_screen);
+                        if (e.target.textContent == "=") {
+                            operator = "";
+                            num_screen = num_buffer;
+                        } else {
+                            operator = e.target.innerText;
+                            num_screen = "";
+                        }
+                        display.innerText = num_buffer;
+                    }
+                }
+            }
+            if (e.target.innerText == "C") {
+                num_buffer = NaN;
+                num_screen = "";
+                operator = "";
+                display.innerText = "";
             }
         });
     </script>
